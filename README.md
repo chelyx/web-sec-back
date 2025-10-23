@@ -79,3 +79,9 @@ Si querés colaborar, abrí un issue o hacé un pull request.
 ## 📄 Licencia
 
 MIT License
+
+## Cuentas de Prueba (DEV)
+Para pruebas de desarrollo, usar:
+- **Usuario:** `profesor_test@test.com`
+- **Clave:** `1234`
+(¡No borrar! Dejar para testing)

@@ -34,6 +34,13 @@ public class NotaController {
         return notaService.obtenerNotasDeCurso(cursoId);
     }
 
+    // Endpoint vulnerable: listar notas por query param 'curso' sin verificar permisos del profesor
+    // EJEMPLO MALICIOSO: GET /api/notas?curso=2
+    @GetMapping
+    public List<Nota> obtenerNotasPorQuery(@RequestParam(name = "curso") Long cursoId) {
+        return notaService.obtenerNotasDeCurso(cursoId);
+    }
+
     // Obtener las notas de un alumno en un curso
     @GetMapping("/curso/{cursoId}/alumno/{auth0Id}")
     public List<Nota> obtenerNotasDeAlumno(
