@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/notas")
 public class NotaController {
 
@@ -34,7 +35,8 @@ public class NotaController {
         return notaService.obtenerNotasDeCurso(cursoId);
     }
 
-    // Endpoint vulnerable: listar notas por query param 'curso' sin verificar permisos del profesor
+    // Endpoint vulnerable: listar notas por query param 'curso' sin verificar
+    // permisos del profesor
     // EJEMPLO MALICIOSO: GET /api/notas?curso=2
     @GetMapping
     public List<Nota> obtenerNotasPorQuery(@RequestParam(name = "curso") Long cursoId) {

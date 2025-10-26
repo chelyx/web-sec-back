@@ -20,8 +20,8 @@ Este es el backend del proyecto **Libreta Digital**, desarrollado en Java usando
 1️⃣ Clonar el repositorio:
 
 ```bash
-git clone https://github.com/chelyx/libreta-digital-backend.git
-cd libreta-digital-backend
+git clone https://github.com/chelyx/web-sec-back.git
+cd web-sec-back
 ```
 
 2️⃣ Compilar:
@@ -81,7 +81,9 @@ Si querés colaborar, abrí un issue o hacé un pull request.
 MIT License
 
 ## Cuentas de Prueba (DEV)
+
 Para pruebas de desarrollo, usar:
+
 - **Usuario:** `profesor_test@test.com`
 - **Clave:** `1234`
-(¡No borrar! Dejar para testing)
+  (¡No borrar! Dejar para testing)

@@ -2,6 +2,8 @@ package com.g5311.libretadigital.controller;
 
 import com.g5311.libretadigital.model.User;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,12 @@ public class UserController {
         return Map.of(
                 "userId", jwt.getSubject(),
                 "roles", rolesClaim);
+    }
+
+    // Endpoint vulnerable (para TP)
+    @GetMapping("/search")
+    public List<Map<String, Object>> vulnerable(@RequestParam String username) throws SQLException {
+        return userService.findByUsernameVulnerable(username);
     }
 
 }

@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.g5311</groupId>
-    <artifactId>libreta-digital-backend</artifactId>
+    <artifactId>web-sec-back</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

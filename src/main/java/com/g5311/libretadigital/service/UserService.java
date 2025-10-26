@@ -1,5 +1,8 @@
 package com.g5311.libretadigital.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -24,5 +27,10 @@ public class UserService {
                     nuevo.setRol(jwt.getClaim("https://sirca.com/roles"));
                     return usuarioRepository.save(nuevo);
                 });
+    }
+
+    // Método vulnerable (para TP)
+    public List<Map<String, Object>> findByUsernameVulnerable(String username) {
+        return usuarioRepository.findByUsernameVulnerable(username);
     }
 }
