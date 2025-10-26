@@ -11,9 +11,8 @@ public class Nota {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "curso_id")
-    private Curso curso;
+    @Column(name = "curso_id")
+    private Long cursoId;
 
     @Column(name = "alumno_auth0_id", nullable = false)
     private String alumnoAuth0Id;
@@ -33,12 +32,12 @@ public class Nota {
         this.id = id;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Long getCurso() {
+        return cursoId;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCurso(Long curso) {
+        this.cursoId = curso;
     }
 
     public String getAlumnoAuth0Id() {

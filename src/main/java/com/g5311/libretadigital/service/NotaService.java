@@ -21,11 +21,8 @@ public class NotaService {
     }
 
     public Nota guardarNota(Long cursoId, String alumnoAuth0Id, String descripcion, Double valor) {
-        Curso curso = cursoRepository.findById(cursoId)
-                .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado"));
-
         Nota nota = new Nota();
-        nota.setCurso(curso);
+        nota.setCurso(cursoId);
         nota.setAlumnoAuth0Id(alumnoAuth0Id);
         nota.setDescripcion(descripcion);
         nota.setValor(valor);
@@ -42,12 +39,9 @@ public class NotaService {
     }
 
     public List<Nota> guardarNotasEnBulk(Long cursoId, List<Nota> notas) {
-        Curso curso = cursoRepository.findById(cursoId)
-                .orElseThrow(() -> new IllegalArgumentException("Curso no encontrado"));
-
         List<Nota> notasAGuardar = notas.stream()
                 .map(n -> {
-                    n.setCurso(curso);
+                    n.setCurso(cursoId);
                     return n;
                 })
                 .collect(Collectors.toList());
