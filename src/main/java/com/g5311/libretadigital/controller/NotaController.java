@@ -1,7 +1,10 @@
 package com.g5311.libretadigital.controller;
 
 import com.g5311.libretadigital.model.Nota;
+import com.g5311.libretadigital.model.dto.NotaDto;
 import com.g5311.libretadigital.service.NotaService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -17,17 +20,17 @@ public class NotaController {
         this.notaService = notaService;
     }
 
-    // Cargar una nota
-    @PostMapping("/curso/{cursoId}")
-    public Nota guardarNota(
-            @PathVariable Long cursoId,
-            @RequestBody Map<String, Object> body) {
-        String alumnoAuth0Id = (String) body.get("alumnoAuth0Id");
-        String descripcion = (String) body.get("descripcion");
-        Double valor = ((Number) body.get("valor")).doubleValue();
+    // // Cargar una nota
+    // @PostMapping("/curso/{cursoId}")
+    // public Nota guardarNota(
+    // @PathVariable Long cursoId,
+    // @RequestBody Map<String, Object> body) {
+    // String alumnoAuth0Id = (String) body.get("alumnoAuth0Id");
+    // String descripcion = (String) body.get("descripcion");
+    // Double valor = ((Number) body.get("valor")).doubleValue();
 
-        return notaService.guardarNota(cursoId, alumnoAuth0Id, descripcion, valor);
-    }
+    // return notaService.guardarNota(cursoId, alumnoAuth0Id, descripcion, valor);
+    // }
 
     // Obtener todas las notas de un curso
     @GetMapping("/curso/{cursoId}")
@@ -41,6 +44,13 @@ public class NotaController {
     @GetMapping
     public List<Nota> obtenerNotasPorQuery(@RequestParam(name = "curso") Long cursoId) {
         return notaService.obtenerNotasDeCurso(cursoId);
+    }
+
+    @PostMapping("/actualizar")
+    public ResponseEntity<Nota> updateNotas(@RequestParam(name = "nota") Long notaId, @RequestBody NotaDto entity) {
+
+        Nota nota = notaService.actualizarNota(notaId, entity);
+        return ResponseEntity.ok(nota);
     }
 
     // Obtener las notas de un alumno en un curso

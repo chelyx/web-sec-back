@@ -2,6 +2,7 @@ package com.g5311.libretadigital.service;
 
 import com.g5311.libretadigital.model.Curso;
 import com.g5311.libretadigital.model.Nota;
+import com.g5311.libretadigital.model.dto.NotaDto;
 import com.g5311.libretadigital.repository.CursoRepository;
 import com.g5311.libretadigital.repository.NotaRepository;
 
@@ -13,25 +14,37 @@ import java.util.stream.Collectors;
 public class NotaService {
 
     private final NotaRepository notaRepository;
-    private final CursoRepository cursoRepository;
 
-    public NotaService(NotaRepository notaRepository, CursoRepository cursoRepository) {
+    public NotaService(NotaRepository notaRepository) {
         this.notaRepository = notaRepository;
-        this.cursoRepository = cursoRepository;
+
     }
 
-    public Nota guardarNota(Long cursoId, String alumnoAuth0Id, String descripcion, Double valor) {
+    public Nota guardarNota(NotaDto notaDto) {
         Nota nota = new Nota();
-        nota.setCurso(cursoId);
-        nota.setAlumnoAuth0Id(alumnoAuth0Id);
-        nota.setDescripcion(descripcion);
-        nota.setValor(valor);
+        nota.setCurso(notaDto.idCurso);
+        nota.setAlumnoAuth0Id(notaDto.idAlumno.toString());
+        nota.setDescripcion(notaDto.descripcion);
+        nota.setValor(notaDto.valor);
+
+        return notaRepository.save(nota);
+    }
+
+    public Nota actualizarNota(Long id, NotaDto notaDto) {
+        Nota nota = notaRepository.findById(id).orElseThrow(() -> new RuntimeException("Nota no encontrada"));
+
+        nota.setDescripcion(notaDto.descripcion);
+        nota.setValor(notaDto.valor);
 
         return notaRepository.save(nota);
     }
 
     public List<Nota> obtenerNotasDeCurso(Long cursoId) {
         return notaRepository.findByCursoId(cursoId);
+    }
+
+    public Nota getNotaById(Long notaId) {
+        return notaRepository.findById(notaId).orElse(null);
     }
 
     public List<Nota> obtenerNotasDeAlumno(Long cursoId, String alumnoAuth0Id) {
