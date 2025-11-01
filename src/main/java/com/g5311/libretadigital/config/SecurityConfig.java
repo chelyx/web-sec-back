@@ -30,7 +30,10 @@ public class SecurityConfig {
                 http
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers("/api/public/**").permitAll()
-                                                .requestMatchers("/h2-console/**").permitAll()
+                                                .requestMatchers("/h2-console/**", "/v3/api-docs/**",
+                                                                "/swagger-ui/**",
+                                                                "/swagger-ui.html")
+                                                .permitAll()
                                                 .requestMatchers("/api/codes/validate/**").hasRole("PROFESOR")
                                                 .anyRequest().authenticated())
                                 .csrf(csrf -> csrf

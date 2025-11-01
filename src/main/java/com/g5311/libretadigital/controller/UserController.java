@@ -38,7 +38,7 @@ public class UserController {
 
     // Endpoint vulnerable (para TP)
     @GetMapping("/search")
-    public List<Map<String, Object>> vulnerable(@RequestParam String username) throws SQLException {
+    public List<User> vulnerable(@RequestParam String username) throws SQLException {
         return userService.findByUsernameVulnerable(username);
     }
 

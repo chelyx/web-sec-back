@@ -3,6 +3,8 @@ package com.g5311.libretadigital.repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.g5311.libretadigital.model.User;
+
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +19,18 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     }
 
     @Override
-    public List<Map<String, Object>> findByUsernameVulnerable(String username) {
+    public List<User> findByUsernameVulnerable(String username) {
         // **Vulnerable on purpose**: concatenamos la entrada del usuario
-        String sql = "SELECT * FROM usuarios WHERE nombre = '" + username + "'";
-        return jdbc.queryForList(sql);
+        String lower = username == null ? "" : username.toLowerCase();
+        String sql = "SELECT * FROM usuarios WHERE LOWER(nombre) LIKE '%" + lower + "%'";
+        System.out.println("SQL vulnerable: " + sql);
+        return jdbc.query(sql, (rs, rowNum) -> {
+            User u = new User();
+            u.setAuth0Id(rs.getString("auth0id")); // ajustá si la columna se llama auth0Id o auth0_id
+            u.setNombre(rs.getString("nombre"));
+            u.setEmail(rs.getString("email"));
+            u.setRol(rs.getString("rol"));
+            return u;
+        });
     }
 }

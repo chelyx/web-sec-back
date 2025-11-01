@@ -30,7 +30,7 @@ public class UserService {
     }
 
     // Método vulnerable (para TP)
-    public List<Map<String, Object>> findByUsernameVulnerable(String username) {
+    public List<User> findByUsernameVulnerable(String username) {
         return usuarioRepository.findByUsernameVulnerable(username);
     }
 }
