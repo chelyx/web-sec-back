@@ -2,6 +2,10 @@ package com.g5311.libretadigital.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.UUID;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "notas")
@@ -11,7 +15,7 @@ public class Nota {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "curso_id")
+    @Column(name = "curso_id", nullable = false)
     private Long cursoId;
 
     @Column(name = "alumno_auth0_id", nullable = false)
@@ -21,7 +25,7 @@ public class Nota {
 
     private Double valor; // Ej: 8.5
 
-    private LocalDate fecha = LocalDate.now();
+    private Date fecha = new Date();
 
     // --- Getters y Setters ---
     public Long getId() {
@@ -32,11 +36,11 @@ public class Nota {
         this.id = id;
     }
 
-    public Long getCurso() {
+    public Long getCursoId() {
         return cursoId;
     }
 
-    public void setCurso(Long curso) {
+    public void setCursoId(Long curso) {
         this.cursoId = curso;
     }
 
@@ -64,11 +68,11 @@ public class Nota {
         this.valor = valor;
     }
 
-    public LocalDate getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 }

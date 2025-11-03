@@ -2,7 +2,10 @@ package com.g5311.libretadigital.controller;
 
 import com.g5311.libretadigital.model.Nota;
 import com.g5311.libretadigital.model.dto.NotaDto;
+import com.g5311.libretadigital.model.dto.NotaResponse;
 import com.g5311.libretadigital.service.NotaService;
+
+import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,21 +36,22 @@ public class NotaController {
     // }
 
     // Obtener todas las notas de un curso
-    @GetMapping("/curso/{cursoId}")
-    public List<Nota> obtenerNotasDeCurso(@PathVariable Long cursoId) {
-        return notaService.obtenerNotasDeCurso(cursoId);
-    }
+    // @GetMapping("/curso/{cursoId}")
+    // public List<NotaResponse> obtenerNotasDeCurso(@PathVariable Long cursoId) {
+    // return notaService.obtenerNotasDeCurso(cursoId);
+    // }
 
     // Endpoint vulnerable: listar notas por query param 'curso' sin verificar
     // permisos del profesor
     // EJEMPLO MALICIOSO: GET /api/notas?curso=2
     @GetMapping
-    public List<Nota> obtenerNotasPorQuery(@RequestParam(name = "curso") Long cursoId) {
+    public List<NotaResponse> obtenerNotasPorQuery(@RequestParam(name = "curso") Long cursoId) {
         return notaService.obtenerNotasDeCurso(cursoId);
     }
 
     @PostMapping("/actualizar")
-    public ResponseEntity<Nota> updateNotas(@RequestParam(name = "nota") Long notaId, @RequestBody NotaDto entity) {
+    public ResponseEntity<Nota> updateNotas(@RequestParam(name = "nota") Long notaId,
+            @Valid @RequestBody NotaDto entity) {
 
         Nota nota = notaService.actualizarNota(notaId, entity);
         return ResponseEntity.ok(nota);

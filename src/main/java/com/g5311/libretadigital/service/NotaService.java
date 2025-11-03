@@ -3,6 +3,7 @@ package com.g5311.libretadigital.service;
 import com.g5311.libretadigital.model.Curso;
 import com.g5311.libretadigital.model.Nota;
 import com.g5311.libretadigital.model.dto.NotaDto;
+import com.g5311.libretadigital.model.dto.NotaResponse;
 import com.g5311.libretadigital.repository.CursoRepository;
 import com.g5311.libretadigital.repository.NotaRepository;
 
@@ -22,7 +23,7 @@ public class NotaService {
 
     public Nota guardarNota(NotaDto notaDto) {
         Nota nota = new Nota();
-        nota.setCurso(notaDto.idCurso);
+        nota.setCursoId(notaDto.idCurso);
         nota.setAlumnoAuth0Id(notaDto.idAlumno.toString());
         nota.setDescripcion(notaDto.descripcion);
         nota.setValor(notaDto.valor);
@@ -39,8 +40,8 @@ public class NotaService {
         return notaRepository.save(nota);
     }
 
-    public List<Nota> obtenerNotasDeCurso(Long cursoId) {
-        return notaRepository.findByCursoId(cursoId);
+    public List<NotaResponse> obtenerNotasDeCurso(Long cursoId) {
+        return notaRepository.findNotaResponsesByCursoId(cursoId);
     }
 
     public Nota getNotaById(Long notaId) {
@@ -54,7 +55,7 @@ public class NotaService {
     public List<Nota> guardarNotasEnBulk(Long cursoId, List<Nota> notas) {
         List<Nota> notasAGuardar = notas.stream()
                 .map(n -> {
-                    n.setCurso(cursoId);
+                    n.setCursoId(cursoId);
                     return n;
                 })
                 .collect(Collectors.toList());

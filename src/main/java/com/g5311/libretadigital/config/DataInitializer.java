@@ -85,25 +85,25 @@ public class DataInitializer {
 
                 // 🧮 Notas de ejemplo
                 Nota n1 = new Nota();
-                n1.setCurso(curso1.getId());
+                n1.setCursoId(curso1.getId());
                 n1.setAlumnoAuth0Id(a1.getAuth0Id());
                 n1.setDescripcion("Parcial 1");
                 n1.setValor(8.0);
 
                 Nota n2 = new Nota();
-                n2.setCurso(curso1.getId());
+                n2.setCursoId(curso1.getId());
                 n2.setAlumnoAuth0Id(a2.getAuth0Id());
                 n2.setDescripcion("Parcial 1");
                 n2.setValor(6.5);
 
                 Nota n3 = new Nota();
-                n3.setCurso(curso1.getId());
+                n3.setCursoId(curso1.getId());
                 n3.setAlumnoAuth0Id(a3.getAuth0Id());
                 n3.setDescripcion("Parcial 1");
                 n3.setValor(9.0);
 
                 Nota n4 = new Nota();
-                n4.setCurso(curso2.getId());
+                n4.setCursoId(curso2.getId());
                 n4.setAlumnoAuth0Id(a1.getAuth0Id());
                 n4.setDescripcion("TP 1");
                 n4.setValor(7.5);
