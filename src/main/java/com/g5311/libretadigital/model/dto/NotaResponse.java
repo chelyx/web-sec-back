@@ -7,18 +7,16 @@ public class NotaResponse {
     private Long id;
     private Long cursoId;
     private Date fecha;
-    private String alumnoId;
     private String alumnoNombre;
     private String descripcion;
     private Double valor;
 
     // 👇 Constructor usado por el JPQL
-    public NotaResponse(Long id, Long cursoId, Date fecha, String auth0Id, String nombre, Double valor,
+    public NotaResponse(Long id, Long cursoId, Date fecha, String nombre, Double valor,
             String descripcion) {
         this.id = id;
         this.cursoId = cursoId;
         this.fecha = fecha;
-        this.alumnoId = auth0Id;
         this.alumnoNombre = nombre;
         this.valor = valor;
         this.descripcion = descripcion;
@@ -47,14 +45,6 @@ public class NotaResponse {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public String getAlumnoId() {
-        return alumnoId;
-    }
-
-    public void setAlumnoId(String alumnoId) {
-        this.alumnoId = alumnoId;
     }
 
     public String getAlumnoNombre() {

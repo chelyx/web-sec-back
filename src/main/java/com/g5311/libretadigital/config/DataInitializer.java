@@ -66,7 +66,19 @@ public class DataInitializer {
                 a3.setEmail("pedro@utn.edu.ar");
                 a3.setRol("ALUMNO");
 
-                userRepository.saveAll(List.of(a1, a2, a3));
+                User a4 = new User();
+                a4.setAuth0Id("auth0|alum4");
+                a4.setNombre("Yasmin Elias");
+                a4.setEmail("yasmin@utn.edu.ar");
+                a4.setRol("ALUMNO");
+
+                User a5 = new User();
+                a5.setAuth0Id("auth0|alum5");
+                a5.setNombre("Cecilia Rocca");
+                a5.setEmail("cecilia@utn.edu.ar");
+                a5.setRol("ALUMNO");
+
+                userRepository.saveAll(List.of(a1, a2, a3, a4, a5));
 
                 // 📘 Cursos
                 Curso curso1 = new Curso();
@@ -79,9 +91,15 @@ public class DataInitializer {
                 curso2.setNombre("Bases de Datos");
                 curso2.setCodigo("BD2024");
                 curso2.setDocenteAuth0Id(prof2.getAuth0Id());
-                curso2.setAlumnos(Set.of(a1, a2));
+                curso2.setAlumnos(Set.of(a1, a2, a5));
 
-                cursoRepository.saveAll(List.of(curso1, curso2));
+                Curso curso3 = new Curso();
+                curso3.setNombre("Bioinformatica - Electiva");
+                curso3.setCodigo("K5055");
+                curso3.setDocenteAuth0Id(prof2.getAuth0Id());
+                curso3.setAlumnos(Set.of(a1, a4, a5));
+
+                cursoRepository.saveAll(List.of(curso1, curso2, curso3));
 
                 // 🧮 Notas de ejemplo
                 Nota n1 = new Nota();
@@ -108,7 +126,13 @@ public class DataInitializer {
                 n4.setDescripcion("TP 1");
                 n4.setValor(7.5);
 
-                notaRepository.saveAll(List.of(n1, n2, n3, n4));
+                Nota n5 = new Nota();
+                n5.setCursoId(curso3.getId());
+                n5.setAlumnoAuth0Id(a5.getAuth0Id());
+                n5.setDescripcion("Final");
+                n5.setValor(5.0);
+
+                notaRepository.saveAll(List.of(n1, n2, n3, n4, n5));
 
                 System.out.println("✅ Datos iniciales cargados correctamente");
         }

@@ -16,7 +16,7 @@ public interface NotaRepository extends JpaRepository<Nota, Long> {
 
     List<Nota> findByCursoIdAndAlumnoAuth0Id(Long cursoId, String alumnoAuth0Id);
 
-    @Query("select new com.g5311.libretadigital.model.dto.NotaResponse(a.id,a.cursoId, a.fecha, u.auth0Id, u.nombre, a.valor, a.descripcion) "
+    @Query("select new com.g5311.libretadigital.model.dto.NotaResponse(a.id,a.cursoId, a.fecha, u.nombre, a.valor, a.descripcion) "
             + "from Nota a join com.g5311.libretadigital.model.User u on a.alumnoAuth0Id = u.auth0Id "
             + "where a.cursoId = :cursoId")
     List<NotaResponse> findNotaResponsesByCursoId(@Param("cursoId") Long cursoId);
